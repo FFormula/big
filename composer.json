@@ -3,7 +3,8 @@
         "yiisoft/yii2": "*",
         "codeception/codeception": "*",
         "yiisoft/yii2-debug": "*",
-        "yiisoft/yii2-bootstrap": "*"
+        "yiisoft/yii2-bootstrap": "*",
+        "codemix/yii2-localeurls": "^1.4"
     },
     "config": {
         "fxp-asset": {
