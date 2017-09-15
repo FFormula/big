@@ -15,7 +15,7 @@ return [
     'help' => null,
     'sourcePath' => __DIR__ . '/../',
     'messagePath' => __DIR__ . '/../messages',
-    'languages' => ['en','ru'],
+    'languages' => ['en','ru','lt'],
     'sourceLanguage' => 'en',
     'translator' => 'Yii::t',
     'sort' => false,

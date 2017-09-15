@@ -2,13 +2,15 @@
 $I = new AcceptanceTester($scenario);
 $I->wantTo('Check Languages');
 
-$I->amOnPage('/');
-$I->see('English', 'a');
+$I->amOnPage('/en');
 $I->see('Русский', 'a');
 
+$I->amOnPage('/ru');
+$I->see('English', 'a');
+
 $I->click('English');
-$I->see('Welcome');
+$I->see('Welcome!');
 
 $I->click('Русский');
-$I->see('Добро пожаловать');
+$I->see('Добро пожаловать!');
 

@@ -9,7 +9,7 @@
             ],
             'urlManager' => [
                 'class' => 'codemix\localeurls\UrlManager',
-                'languages' => ['ru', 'en'],
+                'languages' => ['ru', 'en', 'lt'],
                 'enableDefaultLanguageUrlCode' => true,
                 'enablePrettyUrl' => true,
                 'showScriptName' => false

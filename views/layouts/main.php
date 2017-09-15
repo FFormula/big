@@ -49,11 +49,18 @@ $this->beginPage();
                         [Yii::$app->controller->route, 'language' => 'en'])) ?>
                 |
                 <?= (\Yii::$app->language == 'ru') ?
-                        '<b>Русский</b>'
+                    '<b>Русский</b>'
                     :
-                        Html::a('Русский', array_merge(
-                         Yii::$app->request->get(),
+                    Html::a('Русский', array_merge(
+                        Yii::$app->request->get(),
                         [Yii::$app->controller->route, 'language' => 'ru'])) ?>
+                |
+                <?= (\Yii::$app->language == 'lt') ?
+                        '<b>Lietuviu</b>'
+                    :
+                        Html::a('Lietuviu', array_merge(
+                         Yii::$app->request->get(),
+                        [Yii::$app->controller->route, 'language' => 'lt'])) ?>
             </p>
         </div>
     </footer>
