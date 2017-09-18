@@ -13,10 +13,11 @@ class ConfirmRecord extends ActiveRecord
 
     public static function create ($param, $value, $redirect)
     {
+        static::deleteAll(['param' => $param, 'value' => $value]);
         $confirmRecord = new ConfirmRecord();
         $confirmRecord->code = Yii::$app->security->generateRandomString(32);
         $confirmRecord->param = $param;
-        $confirmRecord->value = $value; // todo: check (param,value) for unique and drop old
+        $confirmRecord->value = $value;
         $confirmRecord->redirect = $redirect;
         $confirmRecord->insert_date = time();
         $confirmRecord->save();
