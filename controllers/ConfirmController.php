@@ -13,4 +13,9 @@ class ConfirmController extends Controller
         $redirect = ConfirmRecord::check ($code);
         return $this->redirect($redirect);
     }
+
+    public function actionError ()
+    {
+        return $this->render('error');
+    }
 }
