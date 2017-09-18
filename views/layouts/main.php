@@ -25,7 +25,11 @@ $this->beginPage();
     ]);
     $items = [
         ['label' => Yii::t('app', 'About'),
-         'url' => ['/site/about']]
+           'url' => ['/site/about']],
+        ['label' => Yii::t('app', 'Login'),
+           'url' => ['user/login']],
+        ['label' => Yii::t('app','Sign up'),
+           'url' => ['user/signup']]
     ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
@@ -41,21 +45,21 @@ $this->beginPage();
         <div class="container">
             <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
             <p class="pull-right">
-                <?= (\Yii::$app->language == 'en') ?
+                <?= (Yii::$app->language == 'en') ?
                         '<b>English</b>'
                     :
                         Html::a('English', array_merge(
                          Yii::$app->request->get(),
                         [Yii::$app->controller->route, 'language' => 'en'])) ?>
                 |
-                <?= (\Yii::$app->language == 'ru') ?
+                <?= (Yii::$app->language == 'ru') ?
                     '<b>Русский</b>'
                     :
                     Html::a('Русский', array_merge(
                         Yii::$app->request->get(),
                         [Yii::$app->controller->route, 'language' => 'ru'])) ?>
                 |
-                <?= (\Yii::$app->language == 'lt') ?
+                <?= (Yii::$app->language == 'lt') ?
                         '<b>Lietuviu</b>'
                     :
                         Html::a('Lietuviu', array_merge(
