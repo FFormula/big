@@ -13,14 +13,13 @@ class m170918_182153_create_confirm_table extends Migration
     public function up()
     {
         $this->createTable('confirm', [
-            'id' => $this->primaryKey(),
             'param' => $this->string()->notNull(),
             'value' => $this->string()->notNull(),
             'code' => $this->string()->notNull()->unique(),
-            'url_correct' => $this->string()->notNull(),
-            'url_invalid' => $this->string()->notNull(),
+            'redirect' => $this->string()->notNull(),
             'insert_date' => $this->integer()
         ]);
+        $this->addPrimaryKey('pk_confirm', 'confirm', ['param', 'value']);
     }
 
     /**

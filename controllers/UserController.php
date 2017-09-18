@@ -22,12 +22,18 @@ class UserController extends Controller
         if ($userSignupForm->load(Yii::$app->request->post()))
             if ($userSignupForm->validate())
             {
-                ConfirmRecord::create('signup.email', $userSignupForm->email,
-                    '/user/register',
-                    '/user/signup'); // todo: show confirm error
+                ConfirmRecord::create(
+                    'signup.email',
+                    $userSignupForm->email,
+                    '/user/register');
                 return $this->redirect('/user/signup-confirm');
             }
         return $this->render('signup', compact('userSignupForm'));
+    }
+
+    public function actionRegister ()
+    {
+        return $this->render('register');
     }
 
     public function actionSignupConfirm ()
