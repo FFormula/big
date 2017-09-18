@@ -1,6 +1,7 @@
 <?php
 
-namespace app\models;
+namespace app\models\user;
+use Yii;
 use yii\base\Model;
 
 class UserSignupForm extends Model
@@ -18,6 +19,8 @@ class UserSignupForm extends Model
 
     public function errorIfNotUsed()
     {
-
+        if ($this->hasErrors()) return;
+        if (UserRecord::existsEmail($this->email))
+            $this->addError('email', Yii::t('app', 'This e-mail already registered'));
     }
 }
