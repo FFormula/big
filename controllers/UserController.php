@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+use app\models\common\ConfirmRecord;
 use app\models\user\UserSignupForm;
 use Yii;
 use yii\web\Controller;
@@ -21,9 +22,17 @@ class UserController extends Controller
         if ($userSignupForm->load(Yii::$app->request->post()))
             if ($userSignupForm->validate())
             {
-                return;
+                ConfirmRecord::create('signup.email', $userSignupForm->email,
+                    '/user/register',
+                    '/user/signup'); // todo: show confirm error
+                return $this->redirect('/user/signup-confirm');
             }
         return $this->render('signup', compact('userSignupForm'));
+    }
+
+    public function actionSignupConfirm ()
+    {
+        return $this->render('signup-confirm');
     }
 
     public function actionLogin()
