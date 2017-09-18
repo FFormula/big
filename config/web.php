@@ -7,6 +7,7 @@
             'request' => [
                 'cookieValidationKey' => 'super secret funnel code'
             ],
+            'db' => require(__DIR__ . '/db.php'),
             'urlManager' => [
                 'class' => 'codemix\localeurls\UrlManager',
                 'languages' => ['ru', 'en', 'lt'],
