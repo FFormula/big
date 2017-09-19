@@ -17,8 +17,18 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Complete Registration' => 'Завершение регистрации',
+    'Invalid e-mail address' => 'Указан не правильный адрес эл. почты',
+    'Sign up confirm' => 'Требуется подтверждение регистрации',
+    '{attribute} must be filled' => 'Поле {attribute} должно быть заполнено',
     'About' => 'О проекте',
+    'Check your email for confirmation link' => 'Проверьте эл. почту для продолжения регистрации',
+    'E-mail:' => '@@Адрес эл. почты:@@',
+    'Login' => 'Войти',
+    'Next' => 'Следующий шаг',
+    'Sign up' => 'Регистрация',
     'Some info' => 'Пару слов',
+    'This e-mail already registered' => 'Этот адрес эл. почты уже заригистрирован',
     'VideoSchool' => 'ВидеоШкола',
     'Welcome!' => 'Добро пожаловать!',
 ];

@@ -18,7 +18,17 @@
  */
 return [
     'About' => '',
+    'Check your email for confirmation link' => '',
+    'Complete Registration' => '',
+    'E-mail:' => '',
+    'Invalid e-mail address' => '',
+    'Login' => '',
+    'Next' => '',
+    'Sign up' => '',
+    'Sign up confirm' => '',
     'Some info' => '',
+    'This e-mail already registered' => '',
     'VideoSchool' => '',
     'Welcome!' => '',
+    '{attribute} must be filled' => '',
 ];

@@ -17,6 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Check your email for confirmation link' => '',
+    'Complete Registration' => '',
+    'E-mail:' => '',
+    'Invalid e-mail address' => '',
+    'Login' => '',
+    'Next' => '',
+    'Sign up' => '',
+    'Sign up confirm' => '',
+    'This e-mail already registered' => '',
+    '{attribute} must be filled' => '',
     'About' => 'Apie',
     'Some info' => 'Pora zodziu',
     'VideoSchool' => 'VideoMokykla',
