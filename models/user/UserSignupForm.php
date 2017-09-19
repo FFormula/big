@@ -13,11 +13,11 @@ class UserSignupForm extends Model
         return [
             ['email', 'required','message' => Yii::t('app', '{attribute} must be filled')],
             ['email', 'email', 'message' => Yii::t('app', 'Invalid e-mail address')],
-            ['email', 'errorIfNotUsed']
+            ['email', 'errorIfEmailUsed']
         ];
     }
 
-    public function errorIfNotUsed()
+    public function errorIfEmailUsed()
     {
         if ($this->hasErrors()) return;
         if (UserRecord::existsEmail($this->email))

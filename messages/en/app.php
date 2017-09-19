@@ -23,7 +23,7 @@ return [
     'E-mail:' => '',
     'Invalid e-mail address' => '',
     'Login' => '',
-    'Next' => '',
+    'Next' => 'Next »',
     'Sign up' => '',
     'Sign up confirm' => '',
     'Some info' => '',

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 use app\models\common\ConfirmRecord;
+use app\models\user\UserRecord;
+use app\models\user\UserRegisterForm;
 use app\models\user\UserSignupForm;
 use Yii;
 use yii\web\Controller;
@@ -33,7 +35,25 @@ class UserController extends Controller
 
     public function actionRegister ()
     {
-        return $this->render('register');
+        if (Yii::$app->request->isPost)
+            return $this->actionRegisterPost();
+        $userRegisterForm = new UserRegisterForm();
+        $userRegisterForm->email = 'vev@';
+        return $this->render('register', compact('userRegisterForm'));
+    }
+
+    public function actionRegisterPost()
+    {
+        $userRegisterForm = new UserRegisterForm();
+        if ($userRegisterForm->load(Yii::$app->request->post()))
+            if ($userRegisterForm->validate())
+            {
+                $userRecord = new UserRecord();
+                $userRecord->setUserRegisterForm ($userRegisterForm);
+                $userRecord->save();
+                $this->redirect('/user/join');
+            }
+        return $this->render('register', compact('userRegisterForm'));
     }
 
     public function actionSignupConfirm ()
