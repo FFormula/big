@@ -3,6 +3,7 @@
 namespace app\models\user;
 
 
+use app\models\common\Email;
 use Yii;
 use yii\base\Model;
 
@@ -11,12 +12,12 @@ class UserRegisterForm extends Model
     public $email;
     public $nickname;
     public $password;
-    const SIGNUP_EMAIL = 'signup.email';
+
 
     public function __construct(array $config = [])
     {
         parent::__construct($config);
-        $this->email = Yii::$app->session->get(static::SIGNUP_EMAIL);
+        $this->email = Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL);
     }
 
     public function rules()
@@ -51,7 +52,7 @@ class UserRegisterForm extends Model
     public function errorIfEmailNoSession()
     {
         if ($this->hasErrors()) return;
-        if ($this->email != Yii::$app->session->get(static::SIGNUP_EMAIL))
+        if ($this->email != Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL))
             $this->addError('email', 'E-mail must be filled on signup page');
     }
 
@@ -67,7 +68,8 @@ class UserRegisterForm extends Model
         $userRecord = new UserRecord();
         $userRecord->setUserRegisterForm($this);
         $userRecord->save();
-        Yii::$app->session->remove(static::SIGNUP_EMAIL);
+        Yii::$app->session->remove(UserSignupForm::SIGNUP_EMAIL);
+        Email::sendRegisterEmail($userRecord->email, $userRecord->nickname);
     }
 
 }

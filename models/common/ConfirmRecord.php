@@ -3,6 +3,7 @@
 namespace app\models\common;
 use Yii;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 class ConfirmRecord extends ActiveRecord
 {
@@ -33,5 +34,10 @@ class ConfirmRecord extends ActiveRecord
         $redirect = $confirmRecord->redirect;
         $confirmRecord->delete();
         return $redirect;
+    }
+
+    public function getConfirmLink ()
+    {
+        return Url::to(['/confirm', 'code' => $this->code],true);
     }
 }

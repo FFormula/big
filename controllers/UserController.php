@@ -24,10 +24,7 @@ class UserController extends Controller
         if ($userSignupForm->load(Yii::$app->request->post()))
             if ($userSignupForm->validate())
             {
-                ConfirmRecord::create(
-                    'signup.email',
-                    $userSignupForm->email,
-                    '/user/register');
+                $userSignupForm->signup();
                 return $this->redirect('/user/signup-confirm');
             }
         return $this->render('signup', compact('userSignupForm'));
@@ -35,8 +32,6 @@ class UserController extends Controller
 
     public function actionRegister ()
     {
-        if (!$email)
-            return $this->redirect('/user/signup'); // press link in the e-mail first
         if (Yii::$app->request->isPost)
             return $this->actionRegisterPost();
         $userRegisterForm = new UserRegisterForm();
@@ -50,7 +45,7 @@ class UserController extends Controller
         if ($userRegisterForm->load(Yii::$app->request->post()))
             if ($userRegisterForm->validate()) {
                 $userRegisterForm->register();
-                $this->redirect('/user/join');
+                $this->redirect('/user/login');
             }
         return $this->render('register', compact('userRegisterForm'));
     }

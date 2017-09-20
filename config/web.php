@@ -8,6 +8,7 @@
                 'cookieValidationKey' => 'super secret funnel code'
             ],
             'db' => require(__DIR__ . '/db.php'),
+            'mailer' => require(__DIR__ . '/mailer.php'),
             'urlManager' => [
                 'class' => 'codemix\localeurls\UrlManager',
                 'languages' => ['ru', 'en', 'lt'],
@@ -15,6 +16,14 @@
                 'enablePrettyUrl' => true,
                 'showScriptName' => false
             ],
+            'i18n' => [
+                'translations' => [
+                    '*' => [
+                        'class' => 'yii\i18n\PhpMessageSource',
+                        'basePath' => '@app/messages',
+                    ]
+                ]
+            ]
         ],
         'modules' => [
             'debug' => 'yii\debug\Module'

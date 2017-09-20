@@ -17,22 +17,8 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'About' => '',
-    'Check your email for confirmation link' => '',
-    'Choose password:' => '',
-    'E-mail:' => '',
-    'Invalid e-mail address' => '',
-    'Login' => '',
-    'Register' => '',
-    'Sign up' => '',
-    'Sign up confirm' => '',
-    'Some info' => '',
-    'This Nickname already taken, choose another one.' => '',
-    'This e-mail already registered' => '',
-    'VideoSchool' => '',
-    'Welcome!' => '',
-    'Your Nickname:' => '',
-    '{attribute} must be filled' => '',
-    'Complete Registration' => '@@@@',
-    'Next' => 'Next »',
+    'Confirm your action' => 'Подтвердите ваше действие',
+    'Hello, {nickname}! Thank you for register' => '',
+    'Press this link to confirm your action: {link}' => '',
+    'You succesfully registered!' => '',
 ];

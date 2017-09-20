@@ -1,12 +1,15 @@
 <?php
 
 namespace app\models\user;
+use app\models\common\ConfirmRecord;
+use app\models\common\Email;
 use Yii;
 use yii\base\Model;
 
 class UserSignupForm extends Model
 {
     public $email;
+    const SIGNUP_EMAIL = 'signup.email';
 
     public function rules()
     {
@@ -29,6 +32,13 @@ class UserSignupForm extends Model
         return [
             'email' => Yii::t('app', 'E-mail:'),
         ];
+    }
+
+    public function signup()
+    {
+        $confirmRecord = ConfirmRecord::create(UserSignupForm::SIGNUP_EMAIL,
+            $this->email,'/user/register');
+        Email::sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
     }
 
 }
