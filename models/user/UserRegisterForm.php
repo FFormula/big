@@ -1,8 +1,6 @@
 <?php
 
 namespace app\models\user;
-
-
 use app\models\common\Email;
 use Yii;
 use yii\base\Model;
@@ -53,14 +51,16 @@ class UserRegisterForm extends Model
     {
         if ($this->hasErrors()) return;
         if ($this->email != Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL))
-            $this->addError('email', 'E-mail must be filled on signup page');
+            $this->addError('email',
+                Yii::t('app', 'E-mail must be filled on signup page'));
     }
 
     public function errorIfEmailUsed()
     {
         if ($this->hasErrors()) return;
         if (UserRecord::existsEmail($this->email))
-            $this->addError('email', Yii::t('app', 'This e-mail already registered'));
+            $this->addError('email',
+                Yii::t('app', 'This e-mail already registered'));
     }
 
     public function register ()

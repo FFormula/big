@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 class ConfirmRecord extends ActiveRecord
 {
-    public static function tableName()
+    public static function tableName() : string
     {
         return 'confirm';
     }
@@ -25,7 +25,7 @@ class ConfirmRecord extends ActiveRecord
         return $confirmRecord;
     }
 
-    public static function check (string $code)
+    public static function check (string $code) : string
     {
         $confirmRecord = static::findOne(['code' => $code]);
         if ($confirmRecord == null)
@@ -36,7 +36,7 @@ class ConfirmRecord extends ActiveRecord
         return $redirect;
     }
 
-    public function getConfirmLink ()
+    public function getConfirmLink () : string
     {
         return Url::to(['/confirm', 'code' => $this->code],true);
     }

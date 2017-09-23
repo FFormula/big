@@ -14,8 +14,10 @@ class UserSignupForm extends Model
     public function rules() : array
     {
         return [
-            ['email', 'required','message' => Yii::t('app', '{attribute} must be filled')],
-            ['email', 'email', 'message' => Yii::t('app', 'Invalid e-mail address')],
+            ['email', 'required',
+                'message' => Yii::t('app', '{attribute} must be filled')],
+            ['email', 'email',
+                'message' => Yii::t('app', 'Invalid e-mail address')],
             ['email', 'errorIfEmailUsed']
         ];
     }
@@ -24,11 +26,11 @@ class UserSignupForm extends Model
     {
         if ($this->hasErrors()) return;
         if (UserRecord::existsEmail($this->email))
-            $this->addError('email', Yii::t('app', 'This e-mail already registered'));
+            $this->addError('email',
+                Yii::t('app', 'This e-mail already registered'));
     }
 
     public function attributeLabels() : array
-
     {
         return [
             'email' => Yii::t('app', 'E-mail:'),
