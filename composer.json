@@ -5,7 +5,8 @@
         "yiisoft/yii2-debug": "*",
         "yiisoft/yii2-bootstrap": "*",
         "codemix/yii2-localeurls": "^1.4",
-        "yiisoft/yii2-swiftmailer": "*"
+        "yiisoft/yii2-swiftmailer": "*",
+        "fxp/composer-asset-plugin": "*"
     },
     "config": {
         "fxp-asset": {
@@ -13,5 +14,5 @@
                 "bower-asset-library": "vendor/bower"
             }
         }
-    }    
+    }
 }
