@@ -13,7 +13,6 @@ class UserRegisterForm extends Model
     public $nickname;
     public $password;
 
-
     public function __construct(array $config = [])
     {
         parent::__construct($config);
@@ -36,6 +35,7 @@ class UserRegisterForm extends Model
     public function attributeLabels()
     {
         return [
+            'email' => Yii::t('app', 'E-mail:'),
             'nickname' => Yii::t('app', 'Your Nickname:'),
             'password' => Yii::t('app', 'Choose password:')
         ];
@@ -72,5 +72,4 @@ class UserRegisterForm extends Model
         $email = new Email();
         $email->sendRegisterEmail($userRecord->email, $userRecord->nickname);
     }
-
 }

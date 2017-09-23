@@ -17,11 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Choose password:' => '',
-    'Register' => '',
-    'This Nickname already taken, choose another one.' => '',
-    'Your Nickname:' => '',
-    'Complete Registration' => '@@Завершение регистрации@@',
+    'Choose password:' => 'Придумайте пароль:',
+    'Password:' => 'Пароль:',
+    'Register' => 'Зарегистрироваться',
+    'Remember me' => 'Запомнить меня',
+    'This Nickname already taken, choose another one.' => 'Это имя уже занято, выберите другое.',
+    'Your Nickname:' => 'Выберите уникальное имя:',
+    'Complete Registration' => 'Завершение регистрации',
     'About' => 'О проекте',
     'Check your email for confirmation link' => 'Проверьте эл. почту для продолжения регистрации',
     'E-mail:' => 'Адрес эл. почты:',

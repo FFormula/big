@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 use app\models\common\ConfirmRecord;
+use app\models\user\UserLoginForm;
 use app\models\user\UserRecord;
 use app\models\user\UserRegisterForm;
 use app\models\user\UserSignupForm;
@@ -35,6 +36,8 @@ class UserController extends Controller
         if (Yii::$app->request->isPost)
             return $this->actionRegisterPost();
         $userRegisterForm = new UserRegisterForm();
+        if (!$userRegisterForm->email)
+            return $this->redirect('/user/signup');
         return $this->render('register', compact('userRegisterForm'));
     }
 
@@ -57,6 +60,21 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-        return $this->render('login');
+        if (Yii::$app->request->isPost)
+            return $this->actionLoginPost();
+        $userLoginForm = new UserLoginForm();
+        return $this->render('login', compact('userLoginForm'));
+    }
+
+    public function actionLoginPost()
+    {
+        $userLoginForm = new UserLoginForm();
+        if ($userLoginForm->load(Yii::$app->request->post()))
+            if ($userLoginForm->validate())
+            {
+                $userLoginForm->login();
+                $this->redirect('/user/index');
+            }
+        return $this->render('login', compact('userLoginForm'));
     }
 }
