@@ -20,7 +20,7 @@ class Email
         Yii::endProfile('email');
     }
 
-    public function sendRegisterEmail($email, $nickname)
+    public function sendRegisterEmail(string $email, string $nickname)
     {
         $this->email = $email;
         $this->subject = Yii::t('mail', 'You succesfully registered!');
@@ -30,7 +30,7 @@ class Email
         $this->send();
     }
 
-    public function sendConfirmLink ($email, $link)
+    public function sendConfirmLink (string $email, string $link)
     {
         $this->email = $email;
         $this->subject = Yii::t('mail', 'Confirm your action');

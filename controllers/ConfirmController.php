@@ -6,7 +6,7 @@ use yii\web\Controller;
 
 class ConfirmController extends Controller
 {
-    public function actionIndex($code = "")
+    public function actionIndex(string $code = "")
     {
         if ($code == "")
             return $this->redirect('/');

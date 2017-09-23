@@ -19,7 +19,7 @@ class UserRegisterForm extends Model
         $this->email = Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL);
     }
 
-    public function rules()
+    public function rules() : array
     {
         return [
             [['email', 'nickname', 'password'], 'required'],
@@ -32,7 +32,7 @@ class UserRegisterForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels() : array
     {
         return [
             'email' => Yii::t('app', 'E-mail:'),

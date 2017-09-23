@@ -11,7 +11,7 @@ class UserSignupForm extends Model
     public $email;
     const SIGNUP_EMAIL = 'signup.email';
 
-    public function rules()
+    public function rules() : array
     {
         return [
             ['email', 'required','message' => Yii::t('app', '{attribute} must be filled')],
@@ -27,7 +27,8 @@ class UserSignupForm extends Model
             $this->addError('email', Yii::t('app', 'This e-mail already registered'));
     }
 
-    public function attributeLabels()
+    public function attributeLabels() : array
+
     {
         return [
             'email' => Yii::t('app', 'E-mail:'),

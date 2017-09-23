@@ -12,7 +12,7 @@ class ConfirmRecord extends ActiveRecord
         return 'confirm';
     }
 
-    public static function create ($param, $value, $redirect)
+    public static function create (string $param, string $value, string $redirect)
     {
         static::deleteAll(['param' => $param, 'value' => $value]);
         $confirmRecord = new ConfirmRecord();
@@ -25,7 +25,7 @@ class ConfirmRecord extends ActiveRecord
         return $confirmRecord;
     }
 
-    public static function check ($code)
+    public static function check (string $code)
     {
         $confirmRecord = static::findOne(['code' => $code]);
         if ($confirmRecord == null)
