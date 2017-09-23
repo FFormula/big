@@ -77,4 +77,27 @@ class UserController extends Controller
             }
         return $this->render('login', compact('userLoginForm'));
     }
+
+    public function actionIndex()
+    {
+        return $this->render('index');
+    }
+
+    public function actionLogout()
+    {
+        $userRecord = Yii::$app->user->getIdentity();
+        if ($userRecord != null)
+            $userRecord->logout();
+        return $this->redirect('/');
+    }
+
+    public function actionProfile()
+    {
+        return $this->render('profile');
+    }
+
+    public function actionSettings()
+    {
+        return $this->render('settings');
+    }
 }

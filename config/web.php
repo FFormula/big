@@ -9,6 +9,10 @@
             ],
             'db' => require(__DIR__ . '/db.php'),
             'mailer' => require(__DIR__ . '/mailer.php'),
+            'user' => [
+                'identityClass' => 'app\models\user\UserRecord',
+                'enableAutoLogin' => true
+            ],
             'urlManager' => [
                 'class' => 'codemix\localeurls\UrlManager',
                 'languages' => ['ru', 'en', 'lt'],

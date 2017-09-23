@@ -50,6 +50,6 @@ class UserLoginForm extends Model
     public function login()
     {
         if ($this->hasErrors()) return;
-
+        $this->userRecord->login($this->remember ? 3600 * 24 * 30 : 0);
     }
 }

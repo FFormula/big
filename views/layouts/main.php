@@ -23,14 +23,24 @@ $this->beginPage();
             'class' => 'navbar-default navbar-fixed-top'
         ]
     ]);
-    $items = [
-        ['label' => Yii::t('app', 'About'),
-           'url' => ['/site/about']],
-        ['label' => Yii::t('app', 'Login'),
-           'url' => ['user/login']],
-        ['label' => Yii::t('app','Sign up'),
-           'url' => ['user/signup']]
-    ];
+    if (Yii::$app->user->isGuest)
+        $items = [
+            ['label' => Yii::t('app', 'About'),
+               'url' => ['/site/about']],
+            ['label' => Yii::t('app', 'Login'),
+               'url' => ['user/login']],
+            ['label' => Yii::t('app','Sign up'),
+               'url' => ['user/signup']]
+        ];
+    else
+        $items = [
+            ['label' => Yii::t('app', 'Profile'),
+                'url' => ['/user/profile']],
+            ['label' => Yii::t('app', 'Settings'),
+                'url' => ['user/settings']],
+            ['label' => Yii::t('app','Logout'),
+                'url' => ['user/logout']]
+        ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $items
