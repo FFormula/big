@@ -38,7 +38,8 @@ class UserSignupForm extends Model
     {
         $confirmRecord = ConfirmRecord::create(UserSignupForm::SIGNUP_EMAIL,
             $this->email,'/user/register');
-        Email::sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
+        $email = new Email();
+        $email->sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
     }
 
 }

@@ -69,7 +69,8 @@ class UserRegisterForm extends Model
         $userRecord->setUserRegisterForm($this);
         $userRecord->save();
         Yii::$app->session->remove(UserSignupForm::SIGNUP_EMAIL);
-        Email::sendRegisterEmail($userRecord->email, $userRecord->nickname);
+        $email = new Email();
+        $email->sendRegisterEmail($userRecord->email, $userRecord->nickname);
     }
 
 }

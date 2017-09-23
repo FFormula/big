@@ -5,32 +5,39 @@ use yii;
 
 class Email
 {
+    private $email;
+    private $subject;
+    private $textBody;
 
-    public static function sendRegisterEmail($email, $nickname)
+    private function send ()
     {
-        $subject = Yii::t('mail', 'You succesfully registered!');
-        $textBody = Yii::t('mail',
-            'Hello, {nickname}! Thank you for register',
-            compact('nickname'));
+        Yii::beginProfile('email');
         Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setSubject($subject)
-            ->setTextBody($textBody)
+            ->setTo($this->email)
+            ->setSubject($this->subject)
+            ->setTextBody($this->textBody)
             ->send();
+        Yii::endProfile('email');
     }
 
-    public static function sendConfirmLink ($email, $link)
+    public function sendRegisterEmail($email, $nickname)
     {
-        $subject = Yii::t('mail', 'Confirm your action');
-        $textBody = Yii::t(
+        $this->email = $email;
+        $this->subject = Yii::t('mail', 'You succesfully registered!');
+        $this->textBody = Yii::t('mail',
+            'Hello, {nickname}! Thank you for register',
+            compact('nickname'));
+        $this->send();
+    }
+
+    public function sendConfirmLink ($email, $link)
+    {
+        $this->email = $email;
+        $this->subject = Yii::t('mail', 'Confirm your action');
+        $this->textBody = Yii::t(
             'mail',
             'Press this link to confirm your action: {link}',
             ['link' => $link]);
-
-        Yii::$app->mailer->compose()
-            ->setTo($email)
-            ->setSubject($subject)
-            ->setTextBody($textBody)
-            ->send();
+        $this->send();
     }
 }
