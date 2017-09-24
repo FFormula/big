@@ -17,6 +17,7 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Change password' => '',
     'Check your email for confirmation link' => '',
     'Choose password:' => '',
     'E-mail must be filled on signup page' => '',

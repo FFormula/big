@@ -18,6 +18,7 @@
  */
 return [
     'About' => '',
+    'Change password' => '',
     'Check your email for confirmation link' => '',
     'Choose password:' => '',
     'E-mail must be filled on signup page' => '',

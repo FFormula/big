@@ -3,7 +3,7 @@ return [
     'class' => '\yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=big',
     'username' => 'big',
-    'password' => 'qwad',
+    'password' => 'qwas1234',
 
     'enableSchemaCache' => true,
     'schemaCache' => 'cache',
