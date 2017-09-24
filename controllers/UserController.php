@@ -3,6 +3,7 @@
 namespace app\controllers;
 use app\models\common\ConfirmRecord;
 use app\models\user\UserLoginForm;
+use app\models\user\UserPasswordChangeForm;
 use app\models\user\UserRecord;
 use app\models\user\UserRegisterForm;
 use app\models\user\UserSignupForm;
@@ -89,6 +90,28 @@ class UserController extends Controller
         if ($userRecord != null)
             $userRecord->logout();
         return $this->redirect('/');
+    }
+
+    public function actionPasswordChange()
+    {
+        if (Yii::$app->request->isPost)
+            return $this->actionPasswordChangePost();
+        $userPasswordChangeForm = new UserPasswordChangeForm();
+        return $this->render('password-change', compact('userPasswordChangeForm'));
+    }
+
+    public function actionPasswordChangePost()
+    {
+        $userPasswordChangeForm = new UserPasswordChangeForm();
+        if ($userPasswordChangeForm->load(Yii::$app->request->post()))
+            if ($userPasswordChangeForm->validate())
+            {
+                $userPasswordChangeForm->changePassword();
+                return $this->redirect('/user/index');
+            }
+        //$userPasswordChangeForm->oldPassword = '';
+        //$userPasswordChangeForm->newPassword = '';
+        return $this->render('password-change', compact('userPasswordChangeForm'));
     }
 
     public function actionProfile()
