@@ -17,9 +17,11 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Change password' => 'Изменить пароль',
+    'Enter new password:' => 'Введите новый пароль:',
+    'Your current password:' => 'Текущий пароль:',
     'Complete Registration' => 'Завершение регистрации',
     'About' => 'О проекте',
+    'Change password' => 'Изменить пароль',
     'Check your email for confirmation link' => 'Проверьте эл. почту для продолжения регистрации',
     'Choose password:' => 'Придумайте пароль:',
     'E-mail must be filled on signup page' => 'Адрес эл. почты нужно указать на странице Signup',

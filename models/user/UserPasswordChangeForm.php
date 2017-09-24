@@ -21,6 +21,14 @@ class UserPasswordChangeForm extends Model
         ];
     }
 
+    public function attributeLabels() : array
+    {
+        return [
+            'oldPassword' => Yii::t('app', 'Your current password:'),
+            'newPassword' => Yii::t('app', 'Enter new password:')
+        ];
+    }
+
     public function errorIfPasswordWrong()
     {
         if ($this->hasErrors()) return;
