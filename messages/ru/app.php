@@ -17,8 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Enter new password:' => 'Введите новый пароль:',
-    'Your current password:' => 'Текущий пароль:',
+    'New password:' => 'Новый пароль:',
+    'Reset password' => 'Сбросить пароль',
+    'Set new password' => 'Установить новый пароль',
     'Complete Registration' => 'Завершение регистрации',
     'About' => 'О проекте',
     'Change password' => 'Изменить пароль',
@@ -26,6 +27,7 @@ return [
     'Choose password:' => 'Придумайте пароль:',
     'E-mail must be filled on signup page' => 'Адрес эл. почты нужно указать на странице Signup',
     'E-mail:' => 'Адрес эл. почты:',
+    'Enter new password:' => 'Введите новый пароль:',
     'Invalid e-mail address' => 'Указан не правильный адрес эл. почты',
     'Login' => 'Войти',
     'Logout' => 'Выход',
@@ -43,5 +45,6 @@ return [
     'VideoSchool' => 'ВидеоШкола',
     'Welcome!' => 'Добро пожаловать!',
     'Your Nickname:' => 'Выберите уникальное имя:',
+    'Your current password:' => 'Текущий пароль:',
     '{attribute} must be filled' => '{attribute} необходимо указать',
 ];

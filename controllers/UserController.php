@@ -4,6 +4,8 @@ namespace app\controllers;
 use app\models\common\ConfirmRecord;
 use app\models\user\UserLoginForm;
 use app\models\user\UserPasswordChangeForm;
+use app\models\user\UserPasswordNewForm;
+use app\models\user\UserPasswordResetForm;
 use app\models\user\UserRecord;
 use app\models\user\UserRegisterForm;
 use app\models\user\UserSignupForm;
@@ -112,6 +114,18 @@ class UserController extends Controller
         //$userPasswordChangeForm->oldPassword = '';
         //$userPasswordChangeForm->newPassword = '';
         return $this->render('password-change', compact('userPasswordChangeForm'));
+    }
+
+    public function actionPasswordReset()
+    {
+        $userPasswordResetForm = new UserPasswordResetForm ();
+        return $this->render('password-reset', compact('userPasswordResetForm'));
+    }
+
+    public function actionPasswordNew()
+    {
+        $userPasswordNewForm = new UserPasswordNewForm ();
+        return $this->render('password-new', compact('userPasswordNewForm'));
     }
 
     public function actionProfile()
