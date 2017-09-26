@@ -3,7 +3,7 @@
 namespace app\models\common;
 use yii;
 
-class Email
+class SendEmail
 {
     private $email;
     private $subject;

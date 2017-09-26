@@ -1,7 +1,8 @@
 <?php
 
 namespace app\models\user;
-use app\models\common\Email;
+use app\models\common\ConfirmRecord;
+use app\models\common\SendEmail;
 use Yii;
 use yii\base\Model;
 
@@ -68,8 +69,8 @@ class UserRegisterForm extends Model
         $userRecord = new UserRecord();
         $userRecord->setUserRegisterForm($this);
         $userRecord->save();
-        Yii::$app->session->remove(UserSignupForm::SIGNUP_EMAIL);
-        $email = new Email();
-        $email->sendRegisterEmail($userRecord->email, $userRecord->nickname);
+        ConfirmRecord::clear(UserSignupForm::SIGNUP_EMAIL);
+        $sendEmail = new SendEmail();
+        $sendEmail->sendRegisterEmail($userRecord->email, $userRecord->nickname);
     }
 }

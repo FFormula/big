@@ -40,4 +40,9 @@ class ConfirmRecord extends ActiveRecord
     {
         return Url::to(['/confirm', 'code' => $this->code],true);
     }
+
+    public static function clear (string $param)
+    {
+        Yii::$app->session->remove($param);
+    }
 }

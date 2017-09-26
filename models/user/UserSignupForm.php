@@ -2,7 +2,7 @@
 
 namespace app\models\user;
 use app\models\common\ConfirmRecord;
-use app\models\common\Email;
+use app\models\common\SendEmail;
 use Yii;
 use yii\base\Model;
 
@@ -41,8 +41,8 @@ class UserSignupForm extends Model
     {
         $confirmRecord = ConfirmRecord::create(UserSignupForm::SIGNUP_EMAIL,
             $this->email,'/user/register');
-        $email = new Email();
-        $email->sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
+        $sendEmail = new SendEmail();
+        $sendEmail->sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
     }
 
 }
