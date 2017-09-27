@@ -42,7 +42,7 @@ class UserController extends Controller
         if ($this->loadPost($userRegisterForm))
         {
             $userRegisterForm->register();
-            return $this->redirect('/user/login');
+            return $this->redirect('/user/login?email=' . $userRegisterForm->email);
         }
         return $this->render('register', compact('userRegisterForm'));
     }
@@ -52,9 +52,10 @@ class UserController extends Controller
         return $this->render('signup-confirm');
     }
 
-    public function actionLogin()
+    public function actionLogin(string $email = '')
     {
         $userLoginForm = new UserLoginForm();
+        $userLoginForm->email = $email;
         if ($this->loadPost($userLoginForm))
         {
             $userLoginForm->login();
