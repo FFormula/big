@@ -12,7 +12,7 @@ class UserPasswordChangeForm extends Model
     /** @UserRecord */
     private $userRecord;
 
-    public function rules ()
+    public function rules () : array
     {
         return [
             [['oldPassword', 'newPassword'], 'required'],

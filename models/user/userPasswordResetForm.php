@@ -15,7 +15,7 @@ class UserPasswordResetForm extends Model
 
     const RESET_EMAIL = 'reset.email';
 
-    public function rules ()
+    public function rules () : array
     {
         return [
             ['email', 'required'],
@@ -24,7 +24,7 @@ class UserPasswordResetForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels() : array
     {
         return [
             'email' => Yii::t('app', 'E-mail:')

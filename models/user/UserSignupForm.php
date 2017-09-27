@@ -22,19 +22,19 @@ class UserSignupForm extends Model
         ];
     }
 
+    public function attributeLabels() : array
+    {
+        return [
+            'email' => Yii::t('app', 'E-mail:'),
+        ];
+    }
+
     public function errorIfEmailUsed()
     {
         if ($this->hasErrors()) return;
         if (UserRecord::existsEmail($this->email))
             $this->addError('email',
                 Yii::t('app', 'This e-mail already registered'));
-    }
-
-    public function attributeLabels() : array
-    {
-        return [
-            'email' => Yii::t('app', 'E-mail:'),
-        ];
     }
 
     public function signup()

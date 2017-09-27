@@ -45,12 +45,12 @@ class UserRecord extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->passhash);
     }
 
-    public function login($duration = 0)
+    public function login(int $duration = 0)
     {
         Yii::$app->user->login($this, $duration);
     }
 
-    public function logout()
+    public static function logout()
     {
         Yii::$app->user->logout();
     }

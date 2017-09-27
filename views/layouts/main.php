@@ -50,9 +50,10 @@ $this->beginPage();
     <div class="container" style="margin-top: 80px">
         <?= $content ?>
     </div>
-    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-    <footer class="footer">
+
+    <div class="footer navbar-default navbar-fixed-bottom">
         <div class="container">
+            <br/>
             <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
             <p class="pull-right">
                 <?= (Yii::$app->language == 'en') ?
@@ -77,7 +78,7 @@ $this->beginPage();
                         [Yii::$app->controller->route, 'language' => 'lt'])) ?>
             </p>
         </div>
-    </footer>
+    </div>
     <?php $this->endBody() ?>
     </body>
 </html>

@@ -19,7 +19,7 @@ class UserPasswordNewForm extends Model
         $this->email = Yii::$app->session->get(UserPasswordResetForm::RESET_EMAIL);
     }
 
-    public function rules ()
+    public function rules () : array
     {
         return [
             [['email', 'newPassword'], 'required'],
@@ -29,7 +29,7 @@ class UserPasswordNewForm extends Model
         ];
     }
 
-    public function attributeLabels()
+    public function attributeLabels() : array
     {
         return [
             'newPassword' => Yii::t('app', 'New password:')
