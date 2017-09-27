@@ -1,3 +1,8 @@
-<h2>User menu</h2>
+<?php
+use yii\helpers\Html;
+?>
+<h2><?= Yii::t('app', 'User menu') ?></h2>
 
-<a href="password-change">Change password</a>
+<?= Html::a(Yii::t('app', 'Change password'), '/user/password-change') ?>
+
+

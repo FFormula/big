@@ -23,7 +23,7 @@ class UserPasswordNewForm extends Model
     {
         return [
             [['email', 'newPassword'], 'required'],
-            ['password', 'string', 'min' => 3, 'max' => 50],
+            ['newPassword', 'string', 'min' => 3, 'max' => 50],
             ['email', 'errorIfEmailNoSession'],
             ['email', 'errorIfEmailNotFound']
         ];

@@ -26,15 +26,14 @@ class UserController extends Controller
     {
         $userSignupForm = new UserSignupForm();
         if ($userSignupForm->load(Yii::$app->request->post()))
-            if ($userSignupForm->validate())
-            {
+            if ($userSignupForm->validate()) {
                 $userSignupForm->signup();
                 return $this->redirect('/user/signup-confirm');
             }
         return $this->render('signup', compact('userSignupForm'));
     }
 
-    public function actionRegister ()
+    public function actionRegister()
     {
         if (Yii::$app->request->isPost)
             return $this->actionRegisterPost();
@@ -56,7 +55,7 @@ class UserController extends Controller
         return $this->render('register', compact('userRegisterForm'));
     }
 
-    public function actionSignupConfirm ()
+    public function actionSignupConfirm()
     {
         return $this->render('signup-confirm');
     }
@@ -73,8 +72,7 @@ class UserController extends Controller
     {
         $userLoginForm = new UserLoginForm();
         if ($userLoginForm->load(Yii::$app->request->post()))
-            if ($userLoginForm->validate())
-            {
+            if ($userLoginForm->validate()) {
                 $userLoginForm->login();
                 $this->redirect('/user/index');
             }
@@ -106,8 +104,7 @@ class UserController extends Controller
     {
         $userPasswordChangeForm = new UserPasswordChangeForm();
         if ($userPasswordChangeForm->load(Yii::$app->request->post()))
-            if ($userPasswordChangeForm->validate())
-            {
+            if ($userPasswordChangeForm->validate()) {
                 $userPasswordChangeForm->changePassword();
                 return $this->redirect('/user/index');
             }
@@ -118,13 +115,45 @@ class UserController extends Controller
 
     public function actionPasswordReset()
     {
+        if (Yii::$app->request->isPost)
+            return $this->actionPasswordResetPost();
         $userPasswordResetForm = new UserPasswordResetForm ();
+        return $this->render('password-reset', compact('userPasswordResetForm'));
+    }
+
+    public function actionPasswordResetPost()
+    {
+        $userPasswordResetForm = new UserPasswordResetForm ();
+        if ($userPasswordResetForm->load(Yii::$app->request->post()))
+            if ($userPasswordResetForm->validate()) {
+                $userPasswordResetForm->reset();
+                return $this->redirect('/user/password-new');
+            }
         return $this->render('password-reset', compact('userPasswordResetForm'));
     }
 
     public function actionPasswordNew()
     {
+        if (Yii::$app->request->isPost)
+            return $this->actionPasswordNewPost();
+
         $userPasswordNewForm = new UserPasswordNewForm ();
+        if (!$userPasswordNewForm->email)
+            return $this->render('password-new-check-email');
+
+        return $this->render('password-new', compact('userPasswordNewForm'));
+    }
+
+    public function actionPasswordNewPost()
+    {
+        $userPasswordNewForm = new UserPasswordNewForm ();
+        if (!$userPasswordNewForm->email)
+            return $this->render('password-new-check-email');
+        if ($userPasswordNewForm->load(Yii::$app->request->post()))
+            if ($userPasswordNewForm->validate()) {
+                $userPasswordNewForm->setNewPassword();
+                return $this->render('/user/password-new-done');
+            }
         return $this->render('password-new', compact('userPasswordNewForm'));
     }
 

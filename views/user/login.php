@@ -17,6 +17,7 @@
             <?= Html::submitButton(Yii::t('app', 'Next'),
                 ['class' => 'btn btn-danger']) ?>
         </div>
+        <?= Html::a(Yii::t('app', 'Reset password'), '/user/password-reset') ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
