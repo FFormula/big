@@ -50,6 +50,5 @@ return [
     'Your Nickname:' => '',
     'Your current password:' => '',
     '{attribute} must be filled' => '',
-    'E-mail must be filled on signup page' => '@@@@',
     'Next' => 'Next »',
 ];

@@ -47,8 +47,6 @@ return [
     'Your Nickname:' => '',
     'Your current password:' => '',
     '{attribute} must be filled' => '',
-    'Complete Registration' => '@@@@',
-    'E-mail must be filled on signup page' => '@@@@',
     'About' => 'Apie',
     'Some info' => 'Pora zodziu',
     'VideoSchool' => 'VideoMokykla',
