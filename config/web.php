@@ -10,7 +10,7 @@
             'db' => require(__DIR__ . '/db.php'),
             'mailer' => require(__DIR__ . '/mailer.php'),
             'user' => [
-                'identityClass' => 'app\models\user\UserRecord',
+                'identityClass' => 'app\models\user\User',
                 'enableAutoLogin' => true
             ],
             'urlManager' => [

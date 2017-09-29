@@ -10,8 +10,8 @@ class UserPasswordResetForm extends Model
 {
     public $email;
 
-    /** @var UserRecord */
-    private $userRecord;
+    /** @var User */
+    private $_user;
 
     const RESET_EMAIL = 'reset.email';
 
@@ -34,17 +34,24 @@ class UserPasswordResetForm extends Model
     public function errorIfEmailNotFound()
     {
         if ($this->hasErrors()) return;
-        $this->userRecord = UserRecord::findByEmail($this->email);
-        if ($this->userRecord == null)
+        if ($this->getUser() == null)
             $this->addError('email', 'This e-mail not found');
     }
 
-    public function reset ()
+    public function sendResetLink ()
     {
+        if (!$this->validate()) return false;
         $confirmRecord = ConfirmRecord::create(UserPasswordResetForm::RESET_EMAIL,
             $this->email,'/user/password-new');
         $sendEmail = new SendEmail();
         $sendEmail->sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
+        return true;
     }
 
+    protected function getUser () : ?User
+    {
+        if ($this->_user === null)
+            return $this->_user = User::findByEmail($this->email);
+        return $this->_user;
+    }
 }

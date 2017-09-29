@@ -7,25 +7,17 @@ use yii\base\Model;
 
 class UserPasswordNewForm extends Model
 {
-    public $email;
     public $newPassword;
 
-    /** @var UserRecord */
-    private $userRecord;
-
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        $this->email = Yii::$app->session->get(UserPasswordResetForm::RESET_EMAIL);
-    }
+    /** @var User */
+    private $_user;
 
     public function rules () : array
     {
         return [
-            [['email', 'newPassword'], 'required'],
+            ['newPassword', 'required'],
             ['newPassword', 'string', 'min' => 3, 'max' => 50],
-            ['email', 'errorIfEmailNoSession'],
-            ['email', 'errorIfEmailNotFound']
+            ['newPassword', 'errorIfUserNotFound']
         ];
     }
 
@@ -36,29 +28,29 @@ class UserPasswordNewForm extends Model
         ];
     }
 
-    public function errorIfEmailNoSession()
+    public function errorIfUserNotFound($attr)
     {
         if ($this->hasErrors()) return;
-        if ($this->email != Yii::$app->session->get(UserPasswordResetForm::RESET_EMAIL))
-            $this->addError('email',
-                Yii::t('app', 'E-mail must be filled on signup page'));
-    }
-
-    public function errorIfEmailNotFound()
-    {
-        if ($this->hasErrors()) return;
-        $this->userRecord = UserRecord::findByEmail($this->email);
-        if ($this->userRecord == null)
-            $this->addError('email', 'This e-mail not found');
+        if ($this->getUser() == null)
+            $this->addError($attr, 'Password cannot be changed - session expired');
     }
 
     public function setNewPassword ()
     {
-        if ($this->hasErrors()) return;
-        $this->userRecord->setPassword($this->newPassword);
-        $this->userRecord->save();
+        if (!$this->validate()) return false;
+        $user = $this->getUser();
+        $user->setPassword($this->newPassword);
+        $user->save();
         ConfirmRecord::clear(UserPasswordResetForm::RESET_EMAIL);
+        return true;
     }
 
-
+    protected function getUser () : ?User
+    {
+        if ($this->_user === null) {
+            $email = Yii::$app->session->get(UserPasswordResetForm::RESET_EMAIL);
+            return $this->_user = User::findByEmail($email);
+        }
+        return $this->_user;
+    }
 }

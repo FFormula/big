@@ -8,15 +8,9 @@ use yii\base\Model;
 
 class UserRegisterForm extends Model
 {
-    public $email;
+    private $email;
     public $nickname;
     public $password;
-
-    public function __construct(array $config = [])
-    {
-        parent::__construct($config);
-        $this->email = Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL);
-    }
 
     public function rules() : array
     {
@@ -25,9 +19,8 @@ class UserRegisterForm extends Model
             ['email', 'email'],
             ['nickname', 'string', 'min' => 3, 'max' => 20],
             ['password', 'string', 'min' => 3, 'max' => 50],
+            ['email', 'errorIfEmailUsed'],
             ['nickname', 'errorIfNicknameUsed'],
-            ['email', 'errorIfEmailNoSession'],
-            ['email', 'errorIfEmailUsed']
         ];
     }
 
@@ -40,37 +33,43 @@ class UserRegisterForm extends Model
         ];
     }
 
-    public function errorIfNicknameUsed()
+    public function errorIfNicknameUsed($attr)
     {
         if ($this->hasErrors()) return;
-        if (UserRecord::existsNickname($this->nickname))
-            $this->addError('nickname',
+        if (User::existsNickname($this->nickname))
+            $this->addError($attr,
                 Yii::t('app', 'This Nickname already taken, choose another one.'));
     }
 
-    public function errorIfEmailNoSession()
+    public function errorIfEmailUsed($attr)
     {
         if ($this->hasErrors()) return;
-        if ($this->email != Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL))
-            $this->addError('email',
-                Yii::t('app', 'E-mail must be filled on signup page'));
-    }
-
-    public function errorIfEmailUsed()
-    {
-        if ($this->hasErrors()) return;
-        if (UserRecord::existsEmail($this->email))
-            $this->addError('email',
+        if (User::existsEmail($this->getEmail()))
+            $this->addError($attr,
                 Yii::t('app', 'This e-mail already registered'));
     }
 
     public function register ()
     {
-        $userRecord = new UserRecord();
-        $userRecord->setUserRegisterForm($this);
-        $userRecord->save();
+        if (!$this->validate()) return false;
+        $user = new User();
+        $user->setUserRegisterForm($this);
+        $user->save();
         ConfirmRecord::clear(UserSignupForm::SIGNUP_EMAIL);
         $sendEmail = new SendEmail();
-        $sendEmail->sendRegisterEmail($userRecord->email, $userRecord->nickname);
+        $sendEmail->sendRegisterEmail($user->email, $user->nickname);
+        return true;
+    }
+
+    public function setEmail()
+    {
+
+    }
+
+    public function getEmail()
+    {
+        if ($this->email == null)
+            return $this->email = Yii::$app->session->get(UserSignupForm::SIGNUP_EMAIL);
+        return $this->email;
     }
 }

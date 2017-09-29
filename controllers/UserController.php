@@ -5,7 +5,7 @@ use app\models\user\UserLoginForm;
 use app\models\user\UserPasswordChangeForm;
 use app\models\user\UserPasswordNewForm;
 use app\models\user\UserPasswordResetForm;
-use app\models\user\UserRecord;
+use app\models\user\User;
 use app\models\user\UserRegisterForm;
 use app\models\user\UserSignupForm;
 use Yii;
@@ -26,24 +26,18 @@ class UserController extends Controller
     public function actionSignup()
     {
         $userSignupForm = new UserSignupForm();
-        if ($this->loadPost($userSignupForm))
-        {
-            $userSignupForm->signup();
-            return $this->redirect('/user/signup-confirm');
-        }
+        if ($userSignupForm->load(Yii::$app->request->post()))
+            if ($userSignupForm->signup())
+                return $this->redirect('/user/signup-confirm');
         return $this->render('signup', compact('userSignupForm'));
     }
 
     public function actionRegister()
     {
         $userRegisterForm = new UserRegisterForm();
-        if (!$userRegisterForm->email)
-            return $this->redirect('/user/signup');
-        if ($this->loadPost($userRegisterForm))
-        {
-            $userRegisterForm->register();
-            return $this->redirect('/user/login?email=' . $userRegisterForm->email);
-        }
+        if ($userRegisterForm->load(Yii::$app->request->post()))
+            if ($userRegisterForm->register())
+                return $this->redirect('/user/login?email=' . $userRegisterForm->getEmail());
         return $this->render('register', compact('userRegisterForm'));
     }
 
@@ -56,11 +50,9 @@ class UserController extends Controller
     {
         $userLoginForm = new UserLoginForm();
         $userLoginForm->email = $email;
-        if ($this->loadPost($userLoginForm))
-        {
-            $userLoginForm->login();
-            return $this->redirect('/user/index');
-        }
+        if ($userLoginForm->load(Yii::$app->request->post()))
+        	if ($userLoginForm->login())
+            	return $this->redirect('/user/index');
         return $this->render('login', compact('userLoginForm'));
     }
 
@@ -71,45 +63,34 @@ class UserController extends Controller
 
     public function actionLogout()
     {
-        UserRecord::logout();
+        User::logout();
         return $this->redirect('/');
     }
 
     public function actionPasswordChange()
     {
         $userPasswordChangeForm = new UserPasswordChangeForm();
-        if ($this->loadPost($userPasswordChangeForm))
-        {
-            $userPasswordChangeForm->changePassword();
-            return $this->redirect('/user/index');
-        }
+        if ($userPasswordChangeForm->load(Yii::$app->request->post()))
+            if ($userPasswordChangeForm->changePassword())
+                return $this->redirect('/user/index');
         return $this->render('password-change', compact('userPasswordChangeForm'));
     }
 
     public function actionPasswordReset()
     {
         $userPasswordResetForm = new UserPasswordResetForm ();
-        if ($this->loadPost($userPasswordResetForm))
-        {
-            $userPasswordResetForm->reset();
-            return $this->redirect('/user/password-new');
-        }
+        if ($userPasswordResetForm->load(Yii::$app->request->post()))
+            if ($userPasswordResetForm->sendResetLink())
+                return $this->redirect('/user/password-new-check-email');
         return $this->render('password-reset', compact('userPasswordResetForm'));
     }
 
     public function actionPasswordNew()
     {
         $userPasswordNewForm = new UserPasswordNewForm ();
-
-        if (!$userPasswordNewForm->email)
-            return $this->render('password-new-check-email');
-
-        if ($this->loadPost($userPasswordNewForm))
-        {
-            $userPasswordNewForm->setNewPassword();
-            return $this->render('/user/password-new-done');
-        }
-
+        if ($userPasswordNewForm->load(Yii::$app->request->post()))
+            if ($userPasswordNewForm->setNewPassword())
+                return $this->render('/user/password-new-done');
         return $this->render('password-new', compact('userPasswordNewForm'));
     }
 

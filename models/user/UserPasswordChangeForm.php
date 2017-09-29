@@ -9,8 +9,8 @@ class UserPasswordChangeForm extends Model
     public $oldPassword;
     public $newPassword;
 
-    /** @UserRecord */
-    private $userRecord;
+    /** @User */
+    private $_user = null;
 
     public function rules () : array
     {
@@ -29,23 +29,33 @@ class UserPasswordChangeForm extends Model
         ];
     }
 
-    public function errorIfPasswordWrong()
+    public function errorIfPasswordWrong($attr)
     {
         if ($this->hasErrors()) return;
-        $this->userRecord = Yii::$app->user->getIdentity();
-        if ($this->userRecord == null) {
-            $this->addError('oldPassword', 'Please re-login');
-            return;
-        }
-        if (!$this->userRecord->validatePassword ($this->oldPassword))
-            $this->addError('oldPassword', 'Password incorrect');
+        /** @var User $user */
+        $user = $this->getUser();
+        if ($user == null)
+            $this->addError($attr, 'Please re-login');
+        else
+        if ($user->validatePassword ($this->oldPassword))
+            $this->addError($attr, 'Password incorrect');
     }
 
     public function changePassword()
     {
-        if ($this->hasErrors()) return;
-        $this->userRecord->setPassword($this->newPassword);
-        $this->userRecord->save();
+        if (!$this->validate()) return false;
+        /** @var User $user */
+        $user = $this->getUser();
+        $user->setPassword($this->newPassword);
+        $user->save();
+        return true;
+    }
+
+    protected function getUser()
+    {
+        if ($this->_user === null)
+            return $this->_user = Yii::$app->user->getIdentity();
+        return $this->_user;
     }
 
 }

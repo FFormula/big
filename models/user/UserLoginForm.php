@@ -10,8 +10,8 @@ class UserLoginForm extends Model
     public $password;
     public $remember;
 
-    /** @UserRecord */
-    private $userRecord;
+    /** @User */
+    private $_user = null;
 
     public function rules() : array
     {
@@ -32,24 +32,35 @@ class UserLoginForm extends Model
         ];
     }
 
-    public function errorIfEmailNotFound()
+    public function errorIfEmailNotFound(string $attr)
     {
         if ($this->hasErrors()) return;
-        $this->userRecord = UserRecord::findByEmail($this->email);
-        if ($this->userRecord == null)
-            $this->addError('email', 'This e-mail not found');
+        if ($this->getUser())
+            return;
+        $this->addError($attr, 'This e-mail not found');
     }
 
-    public function errorIfPasswordWrong()
+    public function errorIfPasswordWrong(string $attr)
     {
         if ($this->hasErrors()) return;
-        if (!$this->userRecord->validatePassword ($this->password))
-            $this->addError('password', 'Password incorrect');
+        $user = $this->getUser();
+        if ($user && $user->validatePassword ($this->password))
+                return;
+        $this->addError($attr, 'Password incorrect');
     }
 
     public function login()
     {
-        if ($this->hasErrors()) return;
-        $this->userRecord->login($this->remember ? 3600 * 24 * 30 : 0);
+        if ($this->validate()) 
+            return Yii::$app->user->login(
+                $this->getUser(), $this->remember ? 3600 * 24 * 30 : 0);
+        return false;
+    }
+
+    protected function getUser () : ?User
+    {
+        if ($this->_user === null)
+            return $this->_user = User::findByEmail($this->email);
+        return $this->_user;
     }
 }

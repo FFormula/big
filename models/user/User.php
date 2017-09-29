@@ -5,7 +5,7 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
-class UserRecord extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     public static function tableName() : string
     {
@@ -22,14 +22,14 @@ class UserRecord extends ActiveRecord implements IdentityInterface
         return static::find()->where(['nickname' => $nickname])->count() > 0;
     }
 
-    public static function findByEmail(string $email) : ?UserRecord
+    public static function findByEmail(string $email) : ?User
     {
         return static::findOne(['email' => $email]);
     }
 
     public function setUserRegisterForm(UserRegisterForm $userRegisterForm)
     {
-        $this->email = $userRegisterForm->email;
+        $this->email = $userRegisterForm->getEmail();
         $this->nickname = $userRegisterForm->nickname;
         $this->setPassword ($userRegisterForm->password);
     }
