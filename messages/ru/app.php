@@ -17,12 +17,13 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
+    'Enter text from picture' => 'Введите текст с картинки:',
+    'Save' => 'Сохранить',
     'About' => 'О проекте',
     'Change password' => 'Изменить пароль',
     'Check your e-mail and press link to continue' => 'Проверьте почту и проследуйте по ссылке в письме для продолжения',
     'Check your email for confirmation link' => 'Проверьте эл. почту для продолжения регистрации',
     'Choose password:' => 'Придумайте пароль:',
-    'E-mail must be filled on signup page' => 'Адрес эл. почты нужно указать на странице Signup',
     'E-mail:' => 'Адрес эл. почты:',
     'Enter new password:' => 'Введите новый пароль:',
     'Go to login page' => 'На страницу входа',

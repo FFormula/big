@@ -1,6 +1,9 @@
 <?php
-    use yii\helpers\Html;
-    use yii\widgets\ActiveForm;
+
+use yii\captcha\Captcha;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 ?>
 <div class="panel panel-danger">
     <div class="panel-heading">
@@ -14,6 +17,7 @@
             <?= $form->field($userLoginForm, 'email') ?>
             <?= $form->field($userLoginForm, 'password')->passwordInput() ?>
             <?= $form->field($userLoginForm, 'remember')->checkbox() ?>
+            <?= $form->field($userLoginForm, 'captcha')->widget(Captcha::className()) ?>
             <?= Html::submitButton(Yii::t('app', 'Next'),
                 ['class' => 'btn btn-danger']) ?>
         </div>

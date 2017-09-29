@@ -63,7 +63,7 @@ class UserRegisterForm extends Model
 
     public function setEmail()
     {
-
+        // yes, this function must be empty
     }
 
     public function getEmail()

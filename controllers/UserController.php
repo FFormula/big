@@ -14,15 +14,6 @@ use yii\web\Controller;
 
 class UserController extends Controller
 {
-    private function loadPost (Model $modelForm)
-    {
-        if (Yii::$app->request->isPost)
-            if ($modelForm->load(Yii::$app->request->post()))
-                if ($modelForm->validate())
-                    return true;
-        return false;
-    }
-
     public function actionSignup()
     {
         $userSignupForm = new UserSignupForm();
