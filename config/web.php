@@ -31,6 +31,6 @@
         ],
         'modules' => [
             'debug' => 'yii\debug\Module'
-        ]
-
+        ],
+        'params' => require(__DIR__ . '/params.php')
     ];

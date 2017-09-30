@@ -5,8 +5,19 @@ use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
+/**
+ * Class ConfirmRecord
+ * @package app\models\common
+ * @property string $param
+ * @property string $value
+ * @property string $code
+ * @property string $redirect
+ * @property int $insert_date
+ */
 class ConfirmRecord extends ActiveRecord
 {
+    const TESTER_CONFIRM_CODE = '0123456789ABCDEF0123456789ABCDEF';
+
     public static function tableName() : string
     {
         return 'confirm';
@@ -16,7 +27,10 @@ class ConfirmRecord extends ActiveRecord
     {
         static::deleteAll(['param' => $param, 'value' => $value]);
         $confirmRecord = new ConfirmRecord();
-        $confirmRecord->code = Yii::$app->security->generateRandomString(32);
+        if (strpos ($value, 'tester_') === 0) // Yii::$app->params['tester_suffix']) === 0)
+            $confirmRecord->code = static::TESTER_CONFIRM_CODE;
+        else
+            $confirmRecord->code = Yii::$app->security->generateRandomString(32);
         $confirmRecord->param = $param;
         $confirmRecord->value = $value;
         $confirmRecord->redirect = $redirect;
