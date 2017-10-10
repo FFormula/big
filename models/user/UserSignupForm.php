@@ -41,7 +41,9 @@ class UserSignupForm extends Model
     {
         if (!$this->validate()) return false;
         $confirmRecord = ConfirmRecord::create(UserSignupForm::SIGNUP_EMAIL,
-            $this->email,'/user/register');
+            $this->email,'/user/register',
+            strpos($this->email, Yii::$app->params['tester_prefix']) === 0 ?
+                $this->email : "");
         $sendEmail = new SendEmail();
         $sendEmail->sendConfirmLink($this->email, $confirmRecord->getConfirmLink());
         return true;

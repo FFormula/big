@@ -9,7 +9,7 @@ class UserLoginForm extends Model
     public $email;
     public $password;
     public $remember;
-    public $captcha;
+    //public $captcha;
 
     /** @User */
     private $_user = null;
@@ -17,11 +17,11 @@ class UserLoginForm extends Model
     public function rules() : array
     {
         return [
-            [['email', 'password', 'captcha'], 'required'],
+            [['email', 'password'], 'required'],
             ['remember', 'boolean'],
             ['email', 'errorIfEmailNotFound'],
             ['password', 'errorIfPasswordWrong'],
-            ['captcha', 'captcha']
+            //['captcha', 'captcha']
         ];
     }
 
@@ -31,7 +31,7 @@ class UserLoginForm extends Model
             'email' => Yii::t('app', 'E-mail:'),
             'password' => Yii::t('app', 'Password:'),
             'remember' => Yii::t('app', 'Remember me'),
-            'captcha' => Yii::t('app', 'Enter text from picture')
+            //'captcha' => Yii::t('app', 'Enter text from picture')
         ];
     }
 

@@ -16,21 +16,17 @@ use yii\helpers\Url;
  */
 class ConfirmRecord extends ActiveRecord
 {
-    const TESTER_CONFIRM_CODE = '0123456789ABCDEF0123456789ABCDEF';
-
     public static function tableName() : string
     {
         return 'confirm';
     }
 
-    public static function create (string $param, string $value, string $redirect)
+    public static function create (string $param, string $value, string $redirect, string $code = "")
     {
         static::deleteAll(['param' => $param, 'value' => $value]);
         $confirmRecord = new ConfirmRecord();
-        if (strpos ($value, 'tester_') === 0) // Yii::$app->params['tester_suffix']) === 0)
-            $confirmRecord->code = static::TESTER_CONFIRM_CODE;
-        else
-            $confirmRecord->code = Yii::$app->security->generateRandomString(32);
+        $confirmRecord->code = $code != "" ? $code :
+            Yii::$app->security->generateRandomString(32);
         $confirmRecord->param = $param;
         $confirmRecord->value = $value;
         $confirmRecord->redirect = $redirect;

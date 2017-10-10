@@ -17,7 +17,6 @@ use yii\widgets\ActiveForm;
             <?= $form->field($userLoginForm, 'email') ?>
             <?= $form->field($userLoginForm, 'password')->passwordInput() ?>
             <?= $form->field($userLoginForm, 'remember')->checkbox() ?>
-            <?= $form->field($userLoginForm, 'captcha')->widget(Captcha::className()) ?>
             <?= Html::submitButton(Yii::t('app', 'Next'),
                 ['class' => 'btn btn-danger']) ?>
         </div>

@@ -2,7 +2,7 @@
 	return [
 		'id' => 'funnel-web',
 	    'basePath' => realpath (__DIR__ . '/../'),
-        'bootstrap' => ['debug'],
+        'bootstrap' => ['debug', 'gii'],
         'components' => [
             'request' => [
                 'cookieValidationKey' => 'super secret funnel code'
@@ -30,7 +30,8 @@
             ]
         ],
         'modules' => [
-            'debug' => 'yii\debug\Module'
+            'debug' => 'yii\debug\Module',
+            'gii' => 'yii\gii\Module'
         ],
         'params' => require(__DIR__ . '/params.php')
     ];
